@@ -51,3 +51,17 @@ xh "http://localhost:8080/SpringBootCrudService/person/search?lastname=Wenigerki
 ```shell
 xh "http://localhost:8080/SpringBootCrudService/person/search?firstname=Wim&lastname=Wenigerkind"
 ```
+
+# Insert Test Data
+```shell
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Alice lastname=Smith
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Bob lastname=Johnson
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Charlie lastname=Williams
+xh post http://localhost:8080/SpringBootCrudService/person firstname=David lastname=Brown
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Eve lastname=Jones
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Frank lastname=Miller
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Grace lastname=Davis
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Helen lastname=Garcia
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Ian lastname=Martinez
+xh post http://localhost:8080/SpringBootCrudService/person firstname=Jane lastname=Rodriguez
+```
