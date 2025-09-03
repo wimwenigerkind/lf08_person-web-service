@@ -98,4 +98,20 @@ public class PersonController {
     public String welcome() {
         return "Welcome to the Person Web Service!";
     }
+
+    @RequestMapping(value = "/SpringBootCrudService/person/search",
+            method = RequestMethod.GET,
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public Iterable<Person> searchPersons(@RequestParam(required = false) String firstname,
+                                          @RequestParam(required = false) String lastname) {
+        if (firstname != null && lastname != null) {
+            return personRepository.findByFirstnameAndLastname(firstname, lastname);
+        } else if (firstname != null) {
+            return personRepository.findByFirstname(firstname);
+        } else if (lastname != null) {
+            return personRepository.findByLastname(lastname);
+        } else {
+            return personRepository.findAll();
+        }
+    }
 }
