@@ -38,3 +38,16 @@ xh patch http://localhost:8080/SpringBootCrudService/person/1 firstname=Wim
 ```shell
 xh delete http://localhost:8080/SpringBootCrudService/person/1
 ```
+
+### searchPersons
+```shell
+xh "http://localhost:8080/SpringBootCrudService/person/search?firstname=Wim"
+```
+
+```shell
+xh "http://localhost:8080/SpringBootCrudService/person/search?lastname=Wenigerkind"
+```
+
+```shell
+xh "http://localhost:8080/SpringBootCrudService/person/search?firstname=Wim&lastname=Wenigerkind"
+```
