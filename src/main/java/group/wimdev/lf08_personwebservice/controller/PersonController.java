@@ -98,8 +98,13 @@ public class PersonController {
             method = RequestMethod.GET,
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public Object apiDocumentation(HttpServletRequest request) {
-        String baseUrl = request.getScheme() + "://" + request.getServerName() + 
-                        (request.getServerPort() == 80 || request.getServerPort() == 443 ? "" : ":" + request.getServerPort());
+        String scheme = request.getHeader("X-Forwarded-Proto");
+        if (scheme == null) scheme = request.getScheme();
+        
+        String host = request.getHeader("X-Forwarded-Host");
+        if (host == null) host = request.getServerName();
+        
+        String baseUrl = scheme + "://" + host;
         
         return Map.of(
                 "service", "Person Web Service API",
