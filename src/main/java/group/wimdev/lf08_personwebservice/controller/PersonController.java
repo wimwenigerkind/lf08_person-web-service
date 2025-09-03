@@ -61,4 +61,12 @@ public class PersonController {
             throw new RuntimeException("Could not find person " + id);
         }
     }
+
+    @RequestMapping(value = "/SpringBootCrudService/person/{id}",
+        method = RequestMethod.DELETE,
+        produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE})
+    public void deletePersonById(@PathVariable long id) {
+        this.personRepository.deleteById(id);
+    }
 }
