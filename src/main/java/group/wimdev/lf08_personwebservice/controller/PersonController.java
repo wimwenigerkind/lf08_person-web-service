@@ -35,4 +35,12 @@ public class PersonController {
             throw new RuntimeException("Could not find person " + id);
         }
     }
+
+    @RequestMapping(value = "/SpringBootCrudService/person",
+        method = RequestMethod.GET,
+        produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE})
+    public Iterable<Person> getAllPersons() {
+        return this.personRepository.findAll();
+    }
 }
