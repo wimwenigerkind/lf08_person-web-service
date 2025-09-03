@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -89,6 +92,59 @@ public class PersonController {
                     MediaType.APPLICATION_XML_VALUE})
     public void deletePersonById(@PathVariable long id) {
         this.personRepository.deleteById(id);
+    }
+
+    @RequestMapping(value = "/",
+            method = RequestMethod.GET,
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Object apiDocumentation(HttpServletRequest request) {
+        String baseUrl = request.getScheme() + "://" + request.getServerName() + 
+                        (request.getServerPort() == 80 || request.getServerPort() == 443 ? "" : ":" + request.getServerPort());
+        
+        return Map.of(
+                "service", "Person Web Service API",
+                "version", "1.0.0",
+                "description", "REST API for managing persons with CRUD operations and search functionality",
+                "base_url", baseUrl,
+                "endpoints", Map.of(
+                        "GET /SpringBootCrudService/person/welcome", "Welcome message",
+                        "GET /SpringBootCrudService/person", "Get all persons",
+                        "GET /SpringBootCrudService/person/{id}", "Get person by ID",
+                        "POST /SpringBootCrudService/person", "Create new person",
+                        "PUT /SpringBootCrudService/person/{id}", "Update person (full)",
+                        "PATCH /SpringBootCrudService/person/{id}", "Update person (partial)",
+                        "DELETE /SpringBootCrudService/person/{id}", "Delete person",
+                        "GET /SpringBootCrudService/person/search", "Search persons by firstname/lastname (case-insensitive)"
+                ),
+                "examples", Map.of(
+                        "create_person", Map.of(
+                                "method", "POST",
+                                "url", "/SpringBootCrudService/person",
+                                "body", Map.of("firstname", "John", "lastname", "Doe"),
+                                "curl", "curl -X POST " + baseUrl + "/SpringBootCrudService/person -H 'Content-Type: application/json' -d '{\"firstname\":\"John\",\"lastname\":\"Doe\"}'"
+                        ),
+                        "search_person", Map.of(
+                                "method", "GET",
+                                "url", "/SpringBootCrudService/person/search?firstname=john",
+                                "curl", "curl '" + baseUrl + "/SpringBootCrudService/person/search?firstname=john'"
+                        ),
+                        "update_person", Map.of(
+                                "method", "PATCH",
+                                "url", "/SpringBootCrudService/person/1",
+                                "body", Map.of("firstname", "Jane"),
+                                "curl", "curl -X PATCH " + baseUrl + "/SpringBootCrudService/person/1 -H 'Content-Type: application/json' -d '{\"firstname\":\"Jane\"}'"
+                        )
+                ),
+                "features", List.of(
+                        "Case-insensitive exact search",
+                        "JSON and XML support",
+                        "Full CRUD operations",
+                        "In-memory H2 database",
+                        "Spring Boot + JPA"
+                ),
+                "author", "Wim Wenigerkind",
+                "repository", "lf08_person-web-service"
+        );
     }
 
     @RequestMapping(value = "/SpringBootCrudService/person/welcome",
