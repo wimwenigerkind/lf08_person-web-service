@@ -43,4 +43,22 @@ public class PersonController {
     public Iterable<Person> getAllPersons() {
         return this.personRepository.findAll();
     }
+
+    @RequestMapping(value = "/SpringBootCrudService/person/{id}",
+        method = RequestMethod.PUT,
+        consumes = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE},
+        produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE})
+    public Person updatePerson(@PathVariable long id, @RequestBody Person updatedPerson) {
+        Optional<Person> person = this.personRepository.findById(id);
+        if (person.isPresent()) {
+            Person _person = person.get();
+            _person.setFirstname(updatedPerson.getFirstname());
+            _person.setLastname(updatedPerson.getLastname());
+            return personRepository.save(_person);
+        } else {
+            throw new RuntimeException("Could not find person " + id);
+        }
+    }
 }
