@@ -14,19 +14,19 @@ public class PersonController {
     private PersonRepository personRepository;
 
     @RequestMapping(value = "/SpringBootCrudService/person",
-        method = RequestMethod.POST,
-        consumes = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE})
+            method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE})
     public Person createPerson(@RequestBody Person newPerson) {
         return personRepository.save(newPerson);
     }
 
     @RequestMapping(value = "/SpringBootCrudService/person/{id}",
-        method = RequestMethod.GET,
-        produces = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE})
+            method = RequestMethod.GET,
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE})
     public Person getPersonById(@PathVariable long id) {
         Optional<Person> person = this.personRepository.findById(id);
         if (person.isPresent()) {
@@ -37,19 +37,19 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/SpringBootCrudService/person",
-        method = RequestMethod.GET,
-        produces = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE})
+            method = RequestMethod.GET,
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE})
     public Iterable<Person> getAllPersons() {
         return this.personRepository.findAll();
     }
 
     @RequestMapping(value = "/SpringBootCrudService/person/{id}",
-        method = RequestMethod.PUT,
-        consumes = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE})
+            method = RequestMethod.PUT,
+            consumes = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE})
     public Person updatePerson(@PathVariable long id, @RequestBody Person updatedPerson) {
         Optional<Person> person = this.personRepository.findById(id);
         if (person.isPresent()) {
@@ -63,11 +63,11 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/SpringBootCrudService/person/{id}",
-        method = RequestMethod.PATCH,
-        consumes = {MediaType.APPLICATION_JSON_VALUE,
-                MediaType.APPLICATION_XML_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE,
-                MediaType.APPLICATION_XML_VALUE})
+            method = RequestMethod.PATCH,
+            consumes = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE})
     public Person patchPerson(@PathVariable long id, @RequestBody Person updatedPerson) {
         Optional<Person> person = this.personRepository.findById(id);
         if (person.isPresent()) {
@@ -84,18 +84,18 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/SpringBootCrudService/person/{id}",
-        method = RequestMethod.DELETE,
-        produces = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE})
+            method = RequestMethod.DELETE,
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE})
     public void deletePersonById(@PathVariable long id) {
         this.personRepository.deleteById(id);
     }
 
     @RequestMapping(value = "/SpringBootCrudService/person/welcome",
-        method = RequestMethod.GET,
-        produces = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE})
+            method = RequestMethod.GET,
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE})
     public String welcome() {
         return "Welcome to the Person Web Service!";
-        }
+    }
 }
