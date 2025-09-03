@@ -69,4 +69,12 @@ public class PersonController {
     public void deletePersonById(@PathVariable long id) {
         this.personRepository.deleteById(id);
     }
+
+    @RequestMapping(value = "/SpringBootCrudService/person/welcome",
+        method = RequestMethod.GET,
+        produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE})
+    public String welcome() {
+        return "Welcome to the Person Web Service!";
+        }
 }
