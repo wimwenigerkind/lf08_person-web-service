@@ -63,6 +63,27 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/SpringBootCrudService/person/{id}",
+        method = RequestMethod.PATCH,
+        consumes = {MediaType.APPLICATION_JSON_VALUE,
+                MediaType.APPLICATION_XML_VALUE},
+        produces = {MediaType.APPLICATION_JSON_VALUE,
+                MediaType.APPLICATION_XML_VALUE})
+    public Person patchPerson(@PathVariable long id, @RequestBody Person updatedPerson) {
+        Optional<Person> person = this.personRepository.findById(id);
+        if (person.isPresent()) {
+            Person _person = person.get();
+            if (updatedPerson.getFirstname() != null) {
+                _person.setFirstname(updatedPerson.getFirstname());
+            }
+            if (updatedPerson.getLastname() != null) {
+                _person.setLastname(updatedPerson.getLastname());
+            }
+            return personRepository.save(_person);
+        }
+        return updatedPerson;
+    }
+
+    @RequestMapping(value = "/SpringBootCrudService/person/{id}",
         method = RequestMethod.DELETE,
         produces = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE})
