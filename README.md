@@ -1,5 +1,7 @@
 # HTTP Requests
 
+Endpoints also available at `https://person-web-service.example.wimwenigerkind.com/`.
+
 ## Welcome Endpoint
 
 ```shell
