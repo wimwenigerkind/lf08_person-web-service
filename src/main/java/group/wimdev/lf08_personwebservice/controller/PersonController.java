@@ -13,7 +13,7 @@ public class PersonController {
     @Autowired
     private PersonRepository personRepository;
 
-        @RequestMapping(value = "/SpringBootCrudService/person",
+    @RequestMapping(value = "/SpringBootCrudService/person",
         method = RequestMethod.POST,
         consumes = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE},
