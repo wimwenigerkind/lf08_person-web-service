@@ -29,6 +29,11 @@ xh http://localhost:8080/SpringBootCrudService/person
 xh put http://localhost:8080/SpringBootCrudService/person/1 firstname=Wim lastname=Wenigerkind
 ```
 
+### patchPerson
+```shell
+xh patch http://localhost:8080/SpringBootCrudService/person/1 firstname=Wim
+```
+
 ### deletePersonById
 ```shell
 xh delete http://localhost:8080/SpringBootCrudService/person/1
